@@ -1,21 +1,20 @@
-# Use a Node.js base image
-FROM node:16
+# Specify base image
+FROM node:14
 
-# Set the working directory
+# Set working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json
+# Copy package.json and package-lock.json files to working directory
 COPY package*.json ./
 
-# Install dependencies
-RUN npm install
+# Install app dependencies
+RUN yarn
 
-# Copy the rest of the application code
+# Copy the rest of the application code to the working directory
 COPY . .
 
-COPY .env .
+# Expose port 5000
+EXPOSE 5000
 
-# Specify the command to start the Express.js server
-CMD node server
-
-
+# Start the application
+CMD [ "yarn", "start" ]

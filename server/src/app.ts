@@ -1,11 +1,12 @@
 import express, { Request, Response } from 'express'
 import dotenv from 'dotenv'
-import './cache'
+import connectRedis from './cache/index'
 
 const app = express()
 dotenv.config()
 
-const port = process.env.PORT || 3000
+connectRedis()
+const port = process.env.PORT || 5000
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello, World!')
