@@ -1,7 +1,10 @@
 import dotenv from 'dotenv'
 
 dotenv.config()
+
+export const port = parseInt(process.env.PORT || '5001')
 export const environment = process.env.NODE_ENV
+
 export const redis = {
   host: process.env.REDIS_HOST || '',
   port: parseInt(process.env.REDIS_PORT || '0'),
@@ -15,3 +18,5 @@ export const caching = {
 }
 
 export const logDirectory = process.env.LOG_DIR
+
+export const corsUrl = process.env.CORS_URL

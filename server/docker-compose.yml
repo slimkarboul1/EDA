@@ -19,10 +19,13 @@ services:
       # This specifies the Dockerfile in your current project directory as the file
       dockerfile: Dockerfile
     env_file: .env
+    network_mode: bridge
     ports:
       - '5000:5001'
     depends_on:
       # - db
+      - redis
+    links:
       - redis
 
   redis:
@@ -30,11 +33,13 @@ services:
     container_name: redis
     restart: unless-stopped
     env_file: .env
+    network_mode: bridge
     ports:
       - '$REDIS_PORT:6379'
     command: redis-server --save 20 1 --loglevel warning --requirepass $REDIS_PASSWORD
     volumes:
       - cache:/data/cache
+
 volumes:
   # db-data:
   cache:
